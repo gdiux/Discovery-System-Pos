@@ -13,20 +13,15 @@ const app = express();
 // CORS
 app.use(cors());
 
+// READ BODY
+app.use(express.json());
+
 // DataBase
 dbConection();
 
 // RUTAS
-app.get('/', (req, res) => {
-
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    });
-
-});
-
-
+app.use('/api/users', require('./routes/users.route'));
+app.use('/api/login', require('./routes/auth.route'));
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor Corriendo en el Puerto', process.env.PORT);
