@@ -20,6 +20,7 @@ app.use(express.json());
 dbConection();
 
 // RUTAS
+app.use('/api/datos', require('./routes/datos.route'));
 app.use('/api/users', require('./routes/users.route'));
 app.use('/api/login', require('./routes/auth.route'));
 
