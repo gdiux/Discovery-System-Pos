@@ -23,6 +23,9 @@ dbConection();
 app.use('/api/datos', require('./routes/datos.route'));
 app.use('/api/users', require('./routes/users.route'));
 app.use('/api/login', require('./routes/auth.route'));
+app.use('/api/clients', require('./routes/clients.route'));
+app.use('/api/departments', require('./routes/departments.route'));
+app.use('/api/products', require('./routes/products.route'));
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor Corriendo en el Puerto', process.env.PORT);

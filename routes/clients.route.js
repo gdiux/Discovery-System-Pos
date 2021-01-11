@@ -1,5 +1,5 @@
 /** =====================================================================
- *  DATOS ROUTER
+ *  CLIENTS ROUTER
 =========================================================================*/
 const { Router } = require('express');
 const { check } = require('express-validator');
@@ -8,52 +8,57 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-// CONTROLLERS
-const { getDatos, createDatos, updateDatos } = require('../controllers/datos.controller');
+// CONTROLLER
+const { getClients, createClient, updateClient, deleteClient } = require('../controllers/clients.controller');
 
 const router = Router();
 
 /** =====================================================================
- *  GET DATOS
+ *  GET CLIENTS
 =========================================================================*/
-router.get('/', validarJWT, getDatos);
+router.get('/', validarJWT, getClients);
 /** =====================================================================
- *  GET DATOS
+ *  GET CLIENTS
 =========================================================================*/
+
 /** =====================================================================
- *  POST CREATE DATOS
+ *  CREATE CLIENT
 =========================================================================*/
 router.post('/', [
         validarJWT,
         check('name', 'El nombre es olbigatorio').not().isEmpty(),
-        check('address', 'El nombre es olbigatorio').not().isEmpty(),
-        check('phone', 'El nombre es olbigatorio').not().isEmpty(),
-        check('nit', 'El nombre es olbigatorio').not().isEmpty(),
-        check('tax', 'El nombre es olbigatorio').not().isEmpty(),
+        check('cedula', 'La Cedula es olbigatoria').not().isEmpty(),
         validarCampos
     ],
-    createDatos
+    createClient
 );
 /** =====================================================================
- *  POST CREATE DATOS
+ *  CREATE CLIENT
 =========================================================================*/
+
 /** =====================================================================
- *  PUT DATOS
+ *  UPDATE CLIENT
 =========================================================================*/
 router.put('/:id', [
         validarJWT,
         check('name', 'El nombre es olbigatorio').not().isEmpty(),
-        check('address', 'El nombre es olbigatorio').not().isEmpty(),
-        check('phone', 'El nombre es olbigatorio').not().isEmpty(),
-        check('nit', 'El nombre es olbigatorio').not().isEmpty(),
-        check('tax', 'El nombre es olbigatorio').not().isEmpty(),
+        check('cedula', 'La Cedula es olbigatoria').not().isEmpty(),
+        check('email', 'El email es olbigatorio').isEmail(),
         validarCampos
     ],
-    updateDatos
+    updateClient
 );
 /** =====================================================================
- *  PUT DATOS
+ *  UPDATE CLIENT
 =========================================================================*/
 
-// EXPORT
+/** =====================================================================
+ *  DELETE CLIENT
+=========================================================================*/
+router.delete('/:id', validarJWT, deleteClient);
+/** =====================================================================
+ *  DELETE CLIENT
+=========================================================================*/
+
+// EXPORTS
 module.exports = router;

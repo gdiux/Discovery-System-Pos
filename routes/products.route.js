@@ -1,5 +1,5 @@
 /** =====================================================================
- *  DATOS ROUTER
+ *  PRODUCTS ROUTER
 =========================================================================*/
 const { Router } = require('express');
 const { check } = require('express-validator');
@@ -8,52 +8,59 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-// CONTROLLERS
-const { getDatos, createDatos, updateDatos } = require('../controllers/datos.controller');
+// CONTROLLER
+const { getProducts, createProduct, updateProduct } = require('../controllers/products.controller');
 
 const router = Router();
 
 /** =====================================================================
- *  GET DATOS
+ *  GET PRODUCTS
 =========================================================================*/
-router.get('/', validarJWT, getDatos);
+router.get('/', validarJWT, getProducts);
 /** =====================================================================
- *  GET DATOS
+ *  GET PRODUCTS
 =========================================================================*/
+
 /** =====================================================================
- *  POST CREATE DATOS
+ *  CREATE PRODUCTS
 =========================================================================*/
 router.post('/', [
         validarJWT,
-        check('name', 'El nombre es olbigatorio').not().isEmpty(),
-        check('address', 'El nombre es olbigatorio').not().isEmpty(),
-        check('phone', 'El nombre es olbigatorio').not().isEmpty(),
-        check('nit', 'El nombre es olbigatorio').not().isEmpty(),
-        check('tax', 'El nombre es olbigatorio').not().isEmpty(),
+        check('code', 'El codigo es obligatorio').not().isEmpty(),
+        check('name', 'El nombre es obligatorio').not().isEmpty(),
+        check('cost', 'El costo es obligatorio').not().isEmpty(),
+        check('gain', 'La ganancia es obligatoria').not().isEmpty(),
+        check('price', 'El precio es obligatorio').not().isEmpty(),
+        check('wholesale', 'El mayoreo es obligatorio').not().isEmpty(),
+        check('type', 'El tipo es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    createDatos
+    createProduct
 );
 /** =====================================================================
- *  POST CREATE DATOS
+ *  CREATE PRODUCTS
 =========================================================================*/
+
 /** =====================================================================
- *  PUT DATOS
+ *  UPDATE PRODUCT
 =========================================================================*/
 router.put('/:id', [
         validarJWT,
-        check('name', 'El nombre es olbigatorio').not().isEmpty(),
-        check('address', 'El nombre es olbigatorio').not().isEmpty(),
-        check('phone', 'El nombre es olbigatorio').not().isEmpty(),
-        check('nit', 'El nombre es olbigatorio').not().isEmpty(),
-        check('tax', 'El nombre es olbigatorio').not().isEmpty(),
+        check('code', 'El codigo es obligatorio').not().isEmpty(),
+        check('name', 'El nombre es obligatorio').not().isEmpty(),
+        check('cost', 'El costo es obligatorio').not().isEmpty(),
+        check('gain', 'La ganancia es obligatoria').not().isEmpty(),
+        check('price', 'El precio es obligatorio').not().isEmpty(),
+        check('wholesale', 'El mayoreo es obligatorio').not().isEmpty(),
+        check('type', 'El tipo es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    updateDatos
+    updateProduct
 );
 /** =====================================================================
- *  PUT DATOS
+ *  UPDATE PRODUCT
 =========================================================================*/
+
 
 // EXPORT
 module.exports = router;

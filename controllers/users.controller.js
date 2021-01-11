@@ -24,7 +24,7 @@ const getUsers = async(req, res) => {
 =========================================================================*/
 const createUsers = async(req, res = response) => {
 
-    const { usuario, name, password, role } = req.body;
+    const { usuario, password } = req.body;
 
     try {
 
@@ -158,7 +158,7 @@ const deleteUser = async(req, res = response) => {
 =========================================================================*/
 
 
-
+// EXPORTS
 module.exports = {
     getUsers,
     createUsers,

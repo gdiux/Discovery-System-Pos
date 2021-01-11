@@ -1,5 +1,5 @@
 /** =====================================================================
- *  DATOS ROUTER
+ *  DEPARTMENTS ROUTER
 =========================================================================*/
 const { Router } = require('express');
 const { check } = require('express-validator');
@@ -8,52 +8,54 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-// CONTROLLERS
-const { getDatos, createDatos, updateDatos } = require('../controllers/datos.controller');
+// CONTROLLER
+const { getDepartments, createDepartment, updateDepartment, deleteDepartment } = require('../controllers/departments.controller');
 
 const router = Router();
 
 /** =====================================================================
- *  GET DATOS
+ *  GET DEPARTMENTS
 =========================================================================*/
-router.get('/', validarJWT, getDatos);
+router.get('/', validarJWT, getDepartments);
 /** =====================================================================
- *  GET DATOS
+ *  GET DEPARTMENTS
 =========================================================================*/
+
 /** =====================================================================
- *  POST CREATE DATOS
+ *  CREATE DEPARTMENTS
 =========================================================================*/
 router.post('/', [
         validarJWT,
-        check('name', 'El nombre es olbigatorio').not().isEmpty(),
-        check('address', 'El nombre es olbigatorio').not().isEmpty(),
-        check('phone', 'El nombre es olbigatorio').not().isEmpty(),
-        check('nit', 'El nombre es olbigatorio').not().isEmpty(),
-        check('tax', 'El nombre es olbigatorio').not().isEmpty(),
+        check('name', 'El nombre es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    createDatos
+    createDepartment
 );
 /** =====================================================================
- *  POST CREATE DATOS
+ *  CREATE DEPARTMENTS
 =========================================================================*/
+
 /** =====================================================================
- *  PUT DATOS
+ *  UPDATE DEPARTMENTS
 =========================================================================*/
 router.put('/:id', [
         validarJWT,
-        check('name', 'El nombre es olbigatorio').not().isEmpty(),
-        check('address', 'El nombre es olbigatorio').not().isEmpty(),
-        check('phone', 'El nombre es olbigatorio').not().isEmpty(),
-        check('nit', 'El nombre es olbigatorio').not().isEmpty(),
-        check('tax', 'El nombre es olbigatorio').not().isEmpty(),
+        check('name', 'El nombre es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    updateDatos
+    updateDepartment
 );
 /** =====================================================================
- *  PUT DATOS
+ *  UPDATE DEPARTMENTS
 =========================================================================*/
 
-// EXPORT
+/** =====================================================================
+ *  DELETE DEPARTMENTS
+=========================================================================*/
+router.delete('/:id', validarJWT, deleteDepartment);
+/** =====================================================================
+ *  DELETE DEPARTMENTS
+=========================================================================*/
+
+// EXPORTS
 module.exports = router;
