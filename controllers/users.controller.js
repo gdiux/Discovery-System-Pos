@@ -8,7 +8,7 @@ const User = require('../models/users.model');
 =========================================================================*/
 const getUsers = async(req, res) => {
 
-    const users = await User.find({}, 'usuario name role');
+    const users = await User.find({}, 'usuario name role img');
 
     res.json({
         ok: true,

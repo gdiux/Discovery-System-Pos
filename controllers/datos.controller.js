@@ -7,7 +7,7 @@ const Datos = require('../models/datos.model');
 =========================================================================*/
 const getDatos = async(req, res) => {
 
-    const datos = await Datos.find({}, 'name address phone nit tax');
+    const datos = await Datos.find({}, 'name address phone nit tax logo');
 
     res.json({
         ok: true,

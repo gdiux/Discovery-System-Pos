@@ -73,6 +73,9 @@ const ProductSchema = Schema({
     img: {
         type: String
     },
+    expiration: {
+        type: Date
+    },
     status: {
         type: Boolean,
         default: true

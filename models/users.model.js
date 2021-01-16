@@ -23,6 +23,9 @@ const UserSchema = Schema({
     address: {
         type: String
     },
+    img: {
+        type: String
+    },
     status: {
         type: Boolean,
         default: true
