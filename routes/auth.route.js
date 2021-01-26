@@ -3,10 +3,13 @@
 =========================================================================*/
 const { Router } = require('express');
 const { check } = require('express-validator');
+
+// HELPERS
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 // CONTROLLERS
-const { login } = require('../controllers/auth.controller');
+const { login, renewJWT } = require('../controllers/auth.controller');
 
 const router = Router();
 
@@ -24,7 +27,13 @@ router.post('/', [
  *  LOGIN
 =========================================================================*/
 
-
+/** =====================================================================
+ *  RENEW TOKEN
+=========================================================================*/
+router.get('/renew', validarJWT, renewJWT);
+/** =====================================================================
+*  RENEW TOKEN
+=========================================================================*/
 
 // EXPORT
 module.exports = router;

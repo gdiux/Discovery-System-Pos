@@ -22,7 +22,7 @@ const ClientSchema = Schema({
     city: {
         type: String
     },
-    Department: {
+    department: {
         type: String
     },
     zip: {

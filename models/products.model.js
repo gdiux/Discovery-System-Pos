@@ -15,7 +15,7 @@ const kitsSchema = Schema({
 const ProductSchema = Schema({
 
     code: {
-        type: Number,
+        type: String,
         require: true,
         unique: true
     },
@@ -34,20 +34,18 @@ const ProductSchema = Schema({
         require: true
     },
     gain: {
-        type: Number,
-        require: true
+        type: Number
     },
     price: {
         type: Number,
         require: true
     },
     wholesale: {
-        type: Number,
-        require: true
+        type: Number
     },
     department: {
-        type: String,
-        default: 'Sin Departamento'
+        type: Schema.Types.ObjectId,
+        ref: 'Department',
     },
     stock: {
         type: Number

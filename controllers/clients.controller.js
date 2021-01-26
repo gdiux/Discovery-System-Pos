@@ -10,11 +10,21 @@ const getClients = async(req, res = response) => {
 
     try {
 
-        const clients = await Client.find();
+        const desde = Number(req.query.desde) || 0;
+
+        const [clients, total] = await Promise.all([
+
+            Client.find()
+            .skip(desde)
+            .limit(10),
+
+            Client.countDocuments()
+        ]);
 
         res.json({
             ok: true,
-            clients
+            clients,
+            total
         });
 
     } catch (error) {

@@ -9,11 +9,15 @@ const getDepartments = async(req, res = response) => {
 
     try {
 
-        const departments = await Department.find();
+        const [departments, total] = await Promise.all([
+            Department.find(),
+            Department.countDocuments()
+        ]);
 
         res.json({
             ok: true,
-            departments
+            departments,
+            total
         });
 
     } catch (error) {
@@ -141,11 +145,20 @@ const deleteDepartment = async(req, res = response) => {
             });
         }
         // SEARCH DEPARTMENT
-        await Department.findByIdAndDelete({ _id: did });
+
+        // CHANGE STATUS
+        if (departmentDB.status === true) {
+            departmentDB.status = false;
+        } else {
+            departmentDB.status = true;
+        }
+        // CHANGE STATUS
+
+        const departmentUpdate = await Department.findByIdAndUpdate(did, departmentDB, { new: true, useFindAndModify: false });
 
         res.json({
             ok: true,
-            msg: 'Departamento eliminado con exito'
+            department: departmentUpdate
         });
 
     } catch (error) {

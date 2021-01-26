@@ -1,36 +1,27 @@
 /** =====================================================================
- *  UPLOADS ROUTER
+ *  USER ROUTER
 =========================================================================*/
 const { Router } = require('express');
 const { check } = require('express-validator');
 
 // MIDDLEWARES
-const expressFileUpload = require('express-fileupload');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 // CONTROLLERS
-const { fileUpload, getImages } = require('../controllers/uploads.controller');
+const { search } = require('../controllers/search.controller');
 
 const router = Router();
 
-router.use(expressFileUpload());
-
 /** =====================================================================
- *  UPLOADS
+ *  SEARCH FOR TABLE
 =========================================================================*/
-router.put('/:tipo/:id', validarJWT, fileUpload);
+router.get('/:tabla/:busqueda', validarJWT, search);
 /** =====================================================================
- *  UPLOADS
+ *  SEARCH FOR TABLE
 =========================================================================*/
 
-/** =====================================================================
- *  GET IMAGES
-=========================================================================*/
-router.get('/:tipo/:image', getImages);
-/** =====================================================================
- *  GET IMAGES
-=========================================================================*/
+
 
 // EXPORT
 module.exports = router;
