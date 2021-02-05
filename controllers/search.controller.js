@@ -4,6 +4,7 @@ const User = require('../models/users.model');
 const Client = require('../models/clients.model');
 const Department = require('../models/departments.model');
 const Product = require('../models/products.model');
+const Caja = require('../models/cajas.model');
 
 /** =====================================================================
  *  SEARCH FOR TABLE
@@ -73,6 +74,20 @@ const search = async(req, res = response) => {
             [data, total] = await Promise.all([
                 Department.find({ name: regex }),
                 Department.countDocuments()
+            ]);
+            break;
+
+        case 'caja':
+
+            // data = await Department.find({ name: regex });
+            [data, total] = await Promise.all([
+                Caja.find({
+                    $or: [
+                        { description: regex },
+                        { name: regex }
+                    ]
+                }),
+                Caja.countDocuments()
             ]);
             break;
 

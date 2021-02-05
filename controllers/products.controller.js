@@ -69,6 +69,35 @@ const oneProduct = async(req, res = response) => {
 };
 
 /** =====================================================================
+ *  GET PRODUCTS BY CODE
+=========================================================================*/
+const codeProduct = async(req, res = response) => {
+
+    try {
+
+        const code = req.params.code;
+
+        const product = await Product.findOne({ code })
+            .populate('kit.product', 'name')
+            .populate('department', 'name');
+
+        res.json({
+            ok: true,
+            product
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado, porfavor intente nuevamente'
+        });
+    }
+
+};
+
+/** =====================================================================
  *  CREATE PRODUCT
 =========================================================================*/
 const createProduct = async(req, res = response) => {
@@ -86,7 +115,7 @@ const createProduct = async(req, res = response) => {
             });
         }
 
-        // // VALIDATE NAME
+        // VALIDATE NAME
         const validateName = await Product.findOne({ name });
         if (validateName) {
             return res.status(400).json({
@@ -232,5 +261,6 @@ module.exports = {
     createProduct,
     updateProduct,
     deleteProduct,
-    oneProduct
+    oneProduct,
+    codeProduct
 };

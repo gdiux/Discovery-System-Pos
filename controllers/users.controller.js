@@ -8,12 +8,28 @@ const User = require('../models/users.model');
 =========================================================================*/
 const getUsers = async(req, res) => {
 
-    const users = await User.find({}, 'usuario name role img');
+    try {
 
-    res.json({
-        ok: true,
-        users
-    });
+        const [users, total] = await Promise.all([
+            User.find({}, 'usuario name role img status'),
+            User.countDocuments()
+        ]);
+
+        res.json({
+            ok: true,
+            users,
+            total
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado, porfavor intente nuevamente'
+        });
+
+    }
+
 
 };
 /** =====================================================================

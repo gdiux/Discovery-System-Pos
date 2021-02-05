@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
+const autoIncrement = require('mongoose-auto-increment');
+
 const dbConection = async() => {
 
     try {
 
-        await mongoose.connect(process.env.DB_CN, {
+        const connection = await mongoose.connect(process.env.DB_CN, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
         });
+
+        autoIncrement.initialize(connection);
 
         console.log('DB Online');
 
