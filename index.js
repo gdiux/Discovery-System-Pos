@@ -30,6 +30,7 @@ app.use('/api/uploads', require('./routes/uploads.route'));
 app.use('/api/search', require('./routes/search.route'));
 app.use('/api/invoice', require('./routes/invoices.route'));
 app.use('/api/caja', require('./routes/cajas.route'));
+app.use('/api/turno', require('./routes/turnos.route'));
 
 app.listen(process.env.PORT, () => {
     console.log('Servidor Corriendo en el Puerto', process.env.PORT);

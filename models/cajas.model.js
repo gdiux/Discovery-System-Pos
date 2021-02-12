@@ -9,6 +9,10 @@ const CajaSchema = Schema({
     description: {
         type: String,
     },
+    turno: {
+        type: Schema.Types.ObjectId,
+        ref: 'Turno'
+    },
     cajero: {
         type: Schema.Types.ObjectId,
         ref: 'User'
